@@ -23,10 +23,10 @@ export class SignupComponent {
     password: new FormControl('', [Validators.required, Validators.min(6)]),
   });
 
-
   register() {
     this.authService.resgister(this.signup.getRawValue()).subscribe( res => {
-      if(res.status === 200) {
+      if(res.id) {
+        localStorage.setItem('userId', res.id);
         this.router.navigate(['/']);
       }
     })

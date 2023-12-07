@@ -1,6 +1,7 @@
 <nav class="navbar bg-secondary">
   <div class="container-fluid">
     <h3 class="navbar-brand text-light" href="#">Driver App</h3>
+    <button type="button" class="btn btn-primary" (click)="logout()">Sign Out</button>
   </div>
 </nav>
 <section class="p-1 mt-2">
@@ -12,6 +13,7 @@
   </div>
   <label class="fs-5 mt-3 ms-1">Select new status:</label>
   <ul class="list-group p-1 list-status">
-    <li *ngFor="let status of statusList" class="list-group-item list-group-item-action" [class.active]="currentStatus == status" (click)="currentStatus = status">{{ status }}</li>
+    <li *ngFor="let status of statusList" class="list-group-item list-group-item-action" [class.active]="selection == status" (click)="selection = status">{{ status }}</li>
   </ul>
+  <button class="btn btn-primary" (click)="update()">Update</button>
 </section>
