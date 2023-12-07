@@ -11,9 +11,12 @@
       <span class="badge text-bg-success ms-2">{{ currentStatus }}</span>
     </div>
   </div>
-  <label class="fs-5 mt-3 ms-1">Select new status:</label>
+  <div class="my-3">
+    <input type="text" class="form-control" id="status" placeholder="status" [(ngModel)]="newStatus">
+    <button class="btn btn-primary" (click)="update()">Add status</button>
+  </div>
+  <label class="fs-5 mt-3 ms-1">Status:</label>
   <ul class="list-group p-1 list-status">
-    <li *ngFor="let status of statusList" class="list-group-item list-group-item-action" [class.active]="selection == status" (click)="selection = status">{{ status }}</li>
+    <li *ngFor="let update of updateList" class="list-group-item">{{ update.status }} - {{ update.location }}</li>
   </ul>
-  <button class="btn btn-primary" (click)="update()">Update</button>
 </section>

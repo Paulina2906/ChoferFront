@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { TrackService } from '../track.service';
 import { HttpClientModule } from '@angular/common/http';
@@ -8,7 +9,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule, HttpClientModule],
+  imports: [CommonModule, HttpClientModule, FormsModule],
   providers: [TrackService],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
@@ -17,22 +18,14 @@ export class DashboardComponent {
 
   constructor(private trackService: TrackService, private authService: AuthService, private router: Router) {
     this.trackService.getStatus().subscribe(res => {
-      this.currentStatus = res.status;
+      this.updateList = res;
+      this.currentStatus = res.length > 0 ? res[res.length - 1].status : '';
     })
   }
 
   currentStatus = 'Estatus 1';
-  selection = '';
-  statusList = [
-    'Estatus 1',
-    'Estatus 2',
-    'Estatus 3',
-    'Estatus 4',
-    'Estatus 5',
-    'Estatus 6',
-    'Estatus 7',
-    'Estatus 8',
-  ];
+  newStatus = '';
+  updateList: { status: string, location: string }[] = [];
 
   update() {
     if(!navigator.geolocation) {
@@ -44,8 +37,13 @@ export class DashboardComponent {
         lat: pos.coords.latitude,
         long: pos.coords.longitude
       }
-      this.currentStatus = this.selection;
-      this.trackService.updateStatus(this.currentStatus, location).subscribe();
+      this.trackService.addStatus(this.newStatus, location).subscribe(()=> {
+        this.newStatus = '';
+        this.trackService.getStatus().subscribe(res => {
+          this.updateList = res;
+          this.currentStatus = res.length > 0 ? res[res.length - 1].status : '';
+        })
+      });
     });
   }
 

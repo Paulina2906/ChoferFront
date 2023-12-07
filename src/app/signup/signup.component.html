@@ -20,7 +20,7 @@
         <label for="inputPassword5" class="form-label">Password</label>
         <input type="password" id="inputPassword5" minlength="6" class="form-control" aria-describedby="passwordHelpBlock" placeholder="Password" formControlName="password" [class.error]="signup.get('password')?.errors">
       </div>
-      <button type="button" [disabled]="!signup.valid" class="btn btn-primary" (click)="register()">Sign In</button>
+      <button type="button" [disabled]="!signup.valid" class="btn btn-primary" (click)="register()">Sign Up</button>
     </form>
   </div>
 </section>
