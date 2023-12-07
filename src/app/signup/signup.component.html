@@ -1,0 +1,26 @@
+<nav class="navbar bg-secondary">
+  <div class="container-fluid">
+    <h3 class="navbar-brand text-light" href="#">Driver App</h3>
+    <a [routerLink]="['/signin']" class="text-decoration-none text-light fw-semibold">Sing In</a>
+  </div>
+</nav>
+<section class="p-1 mt-2">
+  <span class="fs-5 fw-semibold">Sign Up</span>
+  <div class="card p-3">
+    <form [formGroup]="signup">
+      <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input type="text" class="form-control" id="email" placeholder="user@domain.com" formControlName="email" [class.error]="signup.get('email')?.errors">
+      </div>
+      <div class="mb-3">
+        <label for="username" class="form-label">User</label>
+        <input type="text" class="form-control" id="username" placeholder="Username" formControlName="username" [class.error]="signup.get('username')?.errors">
+      </div>
+      <div class="mb-3">
+        <label for="inputPassword5" class="form-label">Password</label>
+        <input type="password" id="inputPassword5" minlength="6" class="form-control" aria-describedby="passwordHelpBlock" placeholder="Password" formControlName="password" [class.error]="signup.get('password')?.errors">
+      </div>
+      <button type="button" [disabled]="!signup.valid" class="btn btn-primary" (click)="register()">Sign In</button>
+    </form>
+  </div>
+</section>

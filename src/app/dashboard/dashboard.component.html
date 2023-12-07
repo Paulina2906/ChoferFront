@@ -1,0 +1,17 @@
+<nav class="navbar bg-secondary">
+  <div class="container-fluid">
+    <h3 class="navbar-brand text-light" href="#">Driver App</h3>
+  </div>
+</nav>
+<section class="p-1 mt-2">
+  <div class="card p-3">
+    <div>
+      <span class="fs-5 fw-semibold">Current Status:</span>
+      <span class="badge text-bg-success ms-2">{{ currentStatus }}</span>
+    </div>
+  </div>
+  <label class="fs-5 mt-3 ms-1">Select new status:</label>
+  <ul class="list-group p-1 list-status">
+    <li *ngFor="let status of statusList" class="list-group-item list-group-item-action" [class.active]="currentStatus == status" (click)="currentStatus = status">{{ status }}</li>
+  </ul>
+</section>
